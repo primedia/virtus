@@ -23,3 +23,22 @@ describe 'Using required attributes' do
     expect(user.age).to be(nil)
   end
 end
+
+describe 'Using lazy coercion' do
+  before do
+    module Examples
+      class User
+        include Virtus.model(:lazy_coerce => true)
+
+        attribute :name, String
+        attribute :age,  Integer
+      end
+    end
+  end
+
+  it 'delays coercion to read time' do
+    user = Examples::User.new(:name => 123)
+    expect(user.instance_variable_get("@name")).to eq(123)
+    expect(user.name).to eq("123")
+  end
+end

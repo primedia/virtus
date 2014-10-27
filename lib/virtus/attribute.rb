@@ -20,7 +20,7 @@ module Virtus
 
     include ::Equalizer.new(:type, :options)
 
-    accept_options :primitive, :accessor, :default, :lazy, :strict, :required, :finalize
+    accept_options :primitive, :accessor, :default, :lazy, :strict, :required, :finalize, :lazy_coerce
 
     strict false
     required true

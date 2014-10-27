@@ -9,6 +9,8 @@ module Virtus
     # Access the coerce setting for this instance
     attr_accessor :coerce
 
+    attr_accessor :lazy_coerce
+
     # Access the strict setting for this instance
     attr_accessor :strict
 
@@ -25,7 +27,8 @@ module Virtus
     # @api private
     def initialize(options={})
       @finalize        = options.fetch(:finalize,true)
-      @coerce          = options.fetch(:coerce,true)
+      @lazy_coerce     = options.fetch(:lazy_coerce,false)
+      @coerce          = @lazy_coerce ? false : options.fetch(:coerce,true)
       @strict          = options.fetch(:strict,false)
       @constructor     = options.fetch(:constructor,true)
       @mass_assignment = options.fetch(:mass_assignment,true)
@@ -54,6 +57,7 @@ module Virtus
     def to_h
       { :coerce             => coerce,
         :finalize           => finalize,
+        :lazy_coerce        => lazy_coerce,
         :strict             => strict,
         :configured_coercer => coercer }.freeze
     end

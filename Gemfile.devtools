@@ -6,6 +6,8 @@ group :development do
   gem 'rspec-its',  '~> 1.0.1'
   gem 'yard',       '~> 0.8.7.4'
 
+gem 'pry'
+
   platform :rbx do
     gem 'rubysl-singleton', '~> 2.0.0'
   end
